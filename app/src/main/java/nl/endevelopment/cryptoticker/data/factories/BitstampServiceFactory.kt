@@ -1,8 +1,9 @@
-package nl.endevelopment.cryptoticker.data
+package nl.endevelopment.cryptoticker.data.factories
 
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import nl.endevelopment.cryptoticker.data.services.BitstampService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -20,7 +21,7 @@ object BitstampServiceFactory {
 
     private fun makeBitstampService(okHttpClient: OkHttpClient, gson: Gson): BitstampService {
         val retrofit = Retrofit.Builder()
-                .baseUrl("https://min-api.cryptocompare.com/data/")
+                .baseUrl("https://www.bitstamp.net/api/v2/")
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(gson))

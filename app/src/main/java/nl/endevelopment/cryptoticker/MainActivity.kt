@@ -2,10 +2,13 @@ package nl.endevelopment.cryptoticker
 
 import android.app.Activity
 import android.os.Bundle
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
-import nl.endevelopment.cryptoticker.data.BitstampServiceFactory
+import nl.endevelopment.cryptoticker.data.factories.BitstampServiceFactory
+import java.util.concurrent.TimeUnit
+
 
 /**
  * Skeleton of an Android Things activity.
@@ -33,7 +36,10 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        updatePrice("eth", "eur")
+        Observable.fromCallable({ updatePrice("eth", "eur") })
+                .repeatWhen({ o -> o.concatMap({ v -> Observable.timer(60, TimeUnit.SECONDS) }) })
+                .subscribe()
+
     }
 
 
@@ -44,7 +50,9 @@ class MainActivity : Activity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe { response ->
-                    price_view.setText(response.last)
+                    price_view.setText("${response.last}")
+                    low_view.setText("low: ${response.last}")
+                    high_view.setText("high: ${response.high}")
                 }
 
     }

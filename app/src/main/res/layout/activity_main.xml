@@ -12,11 +12,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/price_view"
         android:textColor="@color/colorAccent"
-        android:textSize="100sp"
+        android:textSize="150sp"
         tools:text="23.4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/high_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@+id/low_view"
+        app:layout_constraintEnd_toEndOf="@+id/price_view" />
+
+    <TextView
+        android:id="@+id/low_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/high_view"
+        app:layout_constraintTop_toBottomOf="@+id/price_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

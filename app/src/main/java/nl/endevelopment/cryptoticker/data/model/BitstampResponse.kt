@@ -1,15 +1,7 @@
-package nl.endevelopment.cryptoticker.data
+package nl.endevelopment.cryptoticker.data.model
 
-import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-
-interface BitstampService {
-    @GET("https://www.bitstamp.net/api/v2/ticker/{symbol}{currency}/")
-    fun getPrice(@Path("symbol") symbol: String, @Path("currency") currency: String): Single<BitstampResponse>
-}
+import com.google.gson.annotations.Expose
 
 data class BitstampResponse(@SerializedName("high")
                             @Expose
